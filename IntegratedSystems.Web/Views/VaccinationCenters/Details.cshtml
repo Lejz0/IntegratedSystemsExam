@@ -1,0 +1,91 @@
+﻿@model IntegratedSystems.Domain.DTO.CenterDTO
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var counter = 1;
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>VaccinationCenter</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.center.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.center.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.center.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.center.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.center.MaxCapacity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.center.MaxCapacity)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.center.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a> |
+</div>
+
+<div class="btn btn-success btn-lg">
+    <a asp-action="AddPatient" asp-route-id="@Model?.center.Id">Vaccinate Patient</a>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date Taken</th>
+                <th>Center</th>
+                <th>Certificate</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var i = 0;
+                foreach (var item in Model.vaccines)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                i = i + 1;
+                                <p>@i</p>
+                            }
+                            
+
+                       </td>
+                       <td>
+                            @Html.DisplayFor(model => item.PatientFor.FirstName)
+                       </td>
+                        <td>
+                            @Html.DisplayFor(model => item.PatientFor.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.DateTaken)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Center.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Certificate)
+                        </td>
+                    </tr>
+                }
+        }
+        </tbody>
+    </table>
+</div>
